@@ -26,22 +26,14 @@ export default createStore({
   },
   actions: {
     async fetchPeoples({ dispatch }) {
-      try {
-        await dispatch("fetchPeoplesAll", "https://swapi.dev/api/people");
-      } catch (e) {
-        alert("Ошибка");
-      }
+      await dispatch("fetchPeoplesAll", "https://swapi.dev/api/people/");
     },
     async fetchPeoplesAll({ dispatch }, url: string) {
-      try {
-        const response = await axios.get(url);
-        this.commit(Mutations.ADD_PEOPLES, response.data.results);
-        console.log(response);
-        if (response.data.next) {
-          await dispatch("fetchPeoplesAll", response.data.next);
-        }
-      } catch (e) {
-        alert("Ошибка");
+      const response = await axios.get(url);
+      this.commit(Mutations.ADD_PEOPLES, response.data.results);
+      console.log(response);
+      if (response.data.next) {
+        await dispatch("fetchPeoplesAll", response.data.next);
       }
     },
   },

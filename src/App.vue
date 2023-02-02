@@ -1,15 +1,24 @@
 <template>
   <div class="container">
     <nav><router-link to="/">Home</router-link></nav>
-    <router-view />
+    <router-view v-if="!isLoadingPeople" />
+    <div v-else>Загрузка...</div>
   </div>
 </template>
 <script lang="ts" setup>
 import { useStore } from "vuex";
-import { onMounted } from "vue";
-
+import { onMounted, ref } from "vue";
+const isLoadingPeople = ref(true);
 const store = useStore();
-onMounted(() => store.dispatch("fetchPeoples"));
+onMounted(async () => {
+  try {
+    await store.dispatch("fetchPeoples");
+  } catch (e) {
+    alert("Ошибка");
+  } finally {
+    isLoadingPeople.value = false;
+  }
+});
 </script>
 <style lang="scss">
 * {

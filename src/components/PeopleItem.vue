@@ -4,11 +4,11 @@
       <div style="margin-right: 20px">{{ people.name }}</div>
       <div style="margin-right: 20px">{{ people.height }}</div>
       <div style="margin-right: 20px">{{ people.mass }}</div>
-      <div>{{ people.hair }}</div>
+      <div>{{ people.hair_color }}</div>
     </div>
     <div class="people__btns">
-      <my-button @click="$emit('remove', people)">Удалить</my-button>
-      <my-button>Открыть</my-button>
+      <my-button>Добавить</my-button>
+      <my-button>Удлить</my-button>
     </div>
   </div>
 </template>
@@ -34,6 +34,7 @@ defineProps({
   }
   &__btns {
     display: flex;
+    align-items: center;
   }
 }
 </style>

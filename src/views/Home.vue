@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <h1>Welcome to Vue3 + Vue Router + Vuex + TypeScript + Setup Syntax App</h1>
+    <h1>
+      Test task to Vue3 + Vue Router + Vuex + TypeScript + Setup Syntax App
+    </h1>
     <nav>
       <router-link to="/peoples">Peoples</router-link> |
       <router-link to="/favorites">Favorites</router-link>
