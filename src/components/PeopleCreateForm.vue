@@ -1,15 +1,10 @@
 <template>
   <form class="form" @submit.prevent>
     <h4>Создать пользователя</h4>
-    <input v-model="people.name" class="input" type="text" placeholder="name" />
-    <input
-      v-model="people.height"
-      class="input"
-      type="text"
-      placeholder="height"
-    />
-    <input v-model="people.mass" class="input" type="text" placeholder="mass" />
-    <input v-model="people.hair" class="input" type="text" placeholder="hair" />
+    <my-input v-model="people.name" type="text" placeholder="name" />
+    <my-input v-model="people.height" type="text" placeholder="height" />
+    <my-input v-model="people.mass" type="text" placeholder="mass" />
+    <my-input v-model="people.hair_color" type="text" placeholder="hair" />
     <my-button @click="createPeople">Создать</my-button>
   </form>
 </template>
@@ -17,12 +12,13 @@
 <script setup lang="ts">
 import MyButton from "@/UI/MyButton.vue";
 import { ref } from "vue";
+import MyInput from "@/UI/MyInput.vue";
 const people = ref({
   id: Date.now(),
   name: "",
   height: "",
   mass: "",
-  hair: "",
+  hair_color: "",
 });
 const emit = defineEmits<{
   (
@@ -32,7 +28,7 @@ const emit = defineEmits<{
       name: string;
       height: string;
       mass: string;
-      hair: string;
+      hair_color: string;
     }
   ): void;
 }>();
@@ -46,7 +42,7 @@ function clearPeople() {
     name: "",
     height: "",
     mass: "",
-    hair: "",
+    hair_color: "",
   };
 }
 </script>
@@ -59,11 +55,5 @@ function clearPeople() {
     margin-top: 15px;
     align-self: flex-end;
   }
-}
-.input {
-  width: 100%;
-  border: 1px solid cadetblue;
-  padding: 10px 15px;
-  margin-top: 15px;
 }
 </style>

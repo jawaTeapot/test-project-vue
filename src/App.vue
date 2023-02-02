@@ -4,7 +4,13 @@
     <router-view />
   </div>
 </template>
+<script lang="ts" setup>
+import { useStore } from "vuex";
+import { onMounted } from "vue";
 
+const store = useStore();
+onMounted(() => store.dispatch("fetchPeoples"));
+</script>
 <style lang="scss">
 * {
   margin: 0;

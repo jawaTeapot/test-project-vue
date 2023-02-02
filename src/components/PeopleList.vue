@@ -1,6 +1,6 @@
 <template>
   <div v-if="peoples.length > 0">
-    <h3>Список пользователей</h3>
+    <h3 style="margin-top: 15px">Список пользователей</h3>
     <people-item
       v-for="people in peoples"
       :key="people.id"
@@ -8,7 +8,7 @@
       @remove="$emit('remove', people)"
     />
   </div>
-  <h2 v-else>Список пользователей пуст</h2>
+  <h2 v-else style="margin-top: 15px">Список пользователей пуст</h2>
 </template>
 
 <script setup lang="ts">

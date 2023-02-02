@@ -1,14 +1,18 @@
 <template>
-  <input :value="value" class="input" type="text" @input="updateInput" />
+  <input :value="modelValue" class="input" type="text" @input="updateInput" />
 </template>
 
 <script setup lang="ts">
 defineProps({
-  value: [String, Number],
+  modelValue: [String, Number],
 });
-// updateInput(e) {
-//   this.$emit('update:value', e.target.value)
-// }
+
+const emit = defineEmits<{
+  (e: "update:modelValue", v: number): void;
+}>();
+function updateInput(event: any) {
+  emit("update:modelValue", event.target.value);
+}
 </script>
 
 <style scoped lang="scss">
