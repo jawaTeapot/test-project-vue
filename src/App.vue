@@ -1,6 +1,11 @@
 <template>
   <div class="container">
-    <nav><router-link to="/">Home</router-link></nav>
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/peoples/">Peoples</router-link> |
+      <router-link to="/favorites">Favorites</router-link>
+    </nav>
+
     <router-view v-if="!isLoadingPeople" />
     <div v-else>Загрузка...</div>
   </div>

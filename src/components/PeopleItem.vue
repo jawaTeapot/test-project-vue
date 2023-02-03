@@ -7,18 +7,22 @@
       <div>{{ people.hair_color }}</div>
     </div>
     <div class="people__btns">
-      <my-button>Добавить</my-button>
-      <my-button>Удлить</my-button>
+      <my-button v-if="isFavorite" @click="removeFavorite">Удалить</my-button>
+      <my-button v-else @click="addFavorite">Добавить</my-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import MyButton from "@/UI/MyButton.vue";
+import { useFavorite } from "@/composables/useFavorite";
+import { PeopleWithId } from "@/types";
+type Props = {
+  people: PeopleWithId;
+};
+const props = defineProps<Props>();
 
-defineProps({
-  people: { type: Object, required: true },
-});
+const { isFavorite, removeFavorite, addFavorite } = useFavorite(props.people);
 </script>
 
 <style scoped lang="scss">

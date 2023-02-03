@@ -3,9 +3,10 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  modelValue: [String, Number],
-});
+type Props = {
+  modelValue: string | number;
+};
+defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "update:modelValue", v: number): void;

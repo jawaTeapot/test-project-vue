@@ -3,10 +3,13 @@ import { People, PeopleWithId } from "@/types";
 import axios from "axios";
 import { Mutations } from "@/store/types";
 
+const favoritesKey = "favorites";
 export default createStore({
   state: {
     peoples: [] as People[],
-    favorite: [] as People[],
+    favoriteIds: JSON.parse(
+      localStorage.getItem(favoritesKey) ?? "[]"
+    ) as PeopleWithId["id"][],
   },
   getters: {
     peopleWithId(state): PeopleWithId[] {
@@ -15,6 +18,11 @@ export default createStore({
         id: p.url.split("/").reverse()[1],
       }));
     },
+    favorites(state, getters): PeopleWithId[] {
+      return getters.peopleWithId.filter((p: PeopleWithId) =>
+        state.favoriteIds.includes(p.id)
+      );
+    },
   },
   mutations: {
     [Mutations.SET_PEOPLES](state, payload: People[]) {
@@ -22,6 +30,16 @@ export default createStore({
     },
     [Mutations.ADD_PEOPLES](state, payload: People[]) {
       state.peoples.push(...payload);
+    },
+    [Mutations.SET_FAVORITES_ID](state, payload: PeopleWithId["id"]) {
+      state.favoriteIds.push(payload);
+      localStorage.setItem(favoritesKey, JSON.stringify(state.favoriteIds));
+    },
+    [Mutations.REMOVE_FAVORITES_ID](state, payload: PeopleWithId["id"]) {
+      state.favoriteIds = state.favoriteIds.filter(
+        (favoriteId) => favoriteId !== payload
+      );
+      localStorage.setItem(favoritesKey, JSON.stringify(state.favoriteIds));
     },
   },
   actions: {
