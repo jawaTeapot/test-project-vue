@@ -1,10 +1,10 @@
 <template>
   <div class="people">
     <div class="people__item">
-      <div style="margin-right: 20px">{{ people.name }}</div>
-      <div style="margin-right: 20px">{{ people.height }}</div>
-      <div style="margin-right: 20px">{{ people.mass }}</div>
-      <div>{{ people.hair_color }}</div>
+      <div class="people__item-li">{{ people.name }}</div>
+      <div class="people__item-li">{{ people.height }}</div>
+      <div class="people__item-li">{{ people.mass }}</div>
+      <div class="people__item-li">{{ people.hair_color }}</div>
     </div>
     <div class="people__btns">
       <my-button v-if="isFavorite" @click="removeFavorite">Удалить</my-button>
@@ -27,18 +27,29 @@ const { isFavorite, removeFavorite, addFavorite } = useFavorite(props.people);
 
 <style scoped lang="scss">
 .people {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr 230px;
   margin-top: 15px;
   border: 1px solid cadetblue;
   &__item {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    &-li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      border-right: 1px solid cadetblue;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
   &__btns {
+    padding: 15px;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div style="text-align: center">
     <h1>
       Test task to Vue3 + Vue Router + Vuex + TypeScript + Setup Syntax App
     </h1>
@@ -9,11 +9,3 @@
     </nav>
   </div>
 </template>
-
-<script setup lang="ts"></script>
-
-<style scoped lang="scss">
-.home {
-  text-align: center;
-}
-</style>

@@ -31,5 +31,3 @@ function changeOption(event: any) {
   emit("update:modelValue", event.target.value);
 }
 </script>
-
-<style scoped></style>
