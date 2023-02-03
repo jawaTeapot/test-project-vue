@@ -52,13 +52,6 @@ const sortedPeople = computed(() => {
 //   return sortedPeople.value.filter((p) =>
 //     p.name.toLowerCase().includes(searchQuery.value.toLowerCase())
 //   );
-// });
-// watchEffect(async () => {
-//   const response = await store.getters.peopleWithId.sort((a: any, b: any) => {
-//     a[selectedSort.value]?.localeCompare(b[selectedSort.value]);
-//   });
-//   console.log(response);
-// });
 </script>
 
 <style scoped lang="scss"></style>
