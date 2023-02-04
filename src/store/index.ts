@@ -46,13 +46,13 @@ export default createStore({
     async fetchPeoples({ dispatch }) {
       await dispatch("fetchPeoplesAll", "https://swapi.dev/api/people/");
     },
-    async fetchPeoplesAll({ dispatch }, url: string) {
+    async fetchPeoplesAll({ commit }, url: string) {
       const response = await axios.get(url);
-      this.commit(Mutations.ADD_PEOPLES, response.data.results);
+      commit(Mutations.ADD_PEOPLES, response.data.results);
       console.log(response);
-      if (response.data.next) {
-        await dispatch("fetchPeoplesAll", response.data.next);
-      }
+      // if (response.data.next) {
+      //   await dispatch("fetchPeoplesAll", response.data.next);
+      // }
     },
   },
   modules: {},

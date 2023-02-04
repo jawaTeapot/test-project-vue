@@ -1,7 +1,14 @@
 <template>
   <div class="people">
     <div class="people__item">
-      <div class="people__item-li">{{ people.name }}</div>
+      <router-link
+        :to="{
+          name: 'people',
+          params: { id: people.url.split('/').reverse()[1] },
+        }"
+        class="people__item-li"
+        >{{ people.name }}</router-link
+      >
       <div class="people__item-li">{{ people.height }}</div>
       <div class="people__item-li">{{ people.mass }}</div>
       <div class="people__item-li">{{ people.hair_color }}</div>

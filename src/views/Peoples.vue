@@ -5,9 +5,14 @@
       v-model="searchQuery"
       class="peoples__input"
       placeholder="Поиск"
+      @focusin="focusInput = true"
+      @focusout="setFocusInput"
     />
-    <div class="peoples__block">
-      <div v-for="item in searchList" :key="item">
+    <div
+      v-if="focusInput && searchQuery.length && sortedPeople.length"
+      class="peoples__block"
+    >
+      <div v-for="item in searchList" :key="item.id">
         <router-link
           :to="{
             name: 'people',
@@ -34,10 +39,12 @@ import MyInput from "@/UI/MyInput.vue";
 import MySelect from "@/UI/MySelect.vue";
 import { computed, ref, watch } from "vue";
 import axios from "axios";
-const searchList = ref([]);
+import { People } from "@/types";
+const focusInput = ref<Boolean>(false);
+const searchList = ref<Array<People>>([]);
 const store = useStore();
-const selectedSort = ref("");
-const searchQuery = ref("");
+const selectedSort = ref<string>("");
+const searchQuery = ref<string>("");
 const sortOptions = ref([
   { value: "name", name: "По имени" },
   { value: "height", name: "По росту" },
@@ -58,6 +65,13 @@ const sortedPeople = computed(() => {
     a[selectedSort.value]?.localeCompare(b[selectedSort.value])
   );
 });
+
+function setFocusInput() {
+  setTimeout(() => (focusInput.value = true), 100);
+}
+
+// const name = computed(() => {});
+
 // Функционал для input
 // const sortedAndSearchedPeople = computed(() => {
 //   return sortedPeople.value.filter((p) =>
@@ -68,13 +82,6 @@ const sortedPeople = computed(() => {
 <style scoped lang="scss">
 .peoples {
   position: relative;
-  &__input {
-    &:focus {
-      .peoples__block {
-        display: block;
-      }
-    }
-  }
   &__block {
     background: #ffffff;
     position: absolute;
